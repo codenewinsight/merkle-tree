@@ -133,5 +133,38 @@ class TestMerkleTree(unittest.TestCase):
 
         self.assertEqual(merkle_tree.block_header, data)
 
+    def test_8_tx(self):
+        """Test that the tree can construct 8 tx
+        """
+        tx0 = 'a'
+        tx1 = 'b'
+        tx2 = 'c'
+        tx3 = 'd'
+        tx4 = 'e'
+        tx5 = 'f'
+        tx6 = 'g'
+        tx7 = 'h'
+
+        data1 = tx0 + tx1
+        data1 = hash_data(data1, 'sha256')
+        data2 = tx2 + tx3
+        data2 = hash_data(data2, 'sha256')
+        data3 = tx4 + tx5
+        data3 = hash_data(data3, 'sha256')
+        data4 = tx6 + tx7
+        data4 = hash_data(data4, 'sha256')
+
+        data5 = data1 + data2
+        data5 = hash_data(data5, 'sha256')
+        data6 = data3 + data4
+        data6 = hash_data(data6, 'sha256')
+
+        data = data5 + data6
+        data = hash_data(data, 'sha256')
+
+        merkle_tree = MerkleTree([tx0, tx1, tx2, tx3, tx4, tx5, tx6, tx7])
+
+        self.assertEqual(merkle_tree.block_header, data)
+        self.assertEqual(merkle_tree.height, 3)
 if __name__ == '__main__':
     unittest.main()

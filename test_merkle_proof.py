@@ -39,7 +39,7 @@ class TestMerkleProof(unittest.TestCase):
 
         data = tx1 + tx2
         data = hash_data(data, 'sha256')
-
+            
         self.assertEqual([Node('l', data), Node('l', tx3)], merkle_proof(tx4, merkle_tree))
         self.assertEqual([Node('l', data), Node('r', tx4)], merkle_proof(tx3, merkle_tree))
 
